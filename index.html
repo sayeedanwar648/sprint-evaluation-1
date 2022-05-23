@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="navbar">
+      <button id="show_products"><a href="inventory.html">show products</a></button>
+      <!--Create Show Products button here, give id as "show_products". avoid making spelling mistakes in HTML id's-->
+    </div>
+    <div>
+      <h2>Add Products</h2>
+      <form id="products" onsubmit="storeproducts(event)">
+
+        <input id="type" type="text" placeholder="Type">
+        <input id="desc" type="text" placeholder="Description">
+        <input id="price" type="number" placeholder="price">
+        <input id="image" type="text" placeholder="image URL">
+        <!-- <input type="submit">
+         -->
+         <button id="add_products"> Add products</button>
+
+
+      </form>
+
+      <!--Create a form here to accept product data from user, give form HTML id as "products"-->
+
+      <!--Create four inputs to accept Type, Description, price, & image-->
+      <!--give the inputs following respective id's, "type", "desc", "price","image"-->
+      <!--create a "Add Product" button to submit form, give it html id as "add_product"-->
+    
+    </div>
+  </body>
+</html>
+
+<script>
+  
+var arr=JSON.parse(localStorage.getItem("products"))||[]
+
+function product_form(t,d,p,i){
+
+    this.type=t;
+    this.desc=d;
+    this.price=p;
+    this.image=i
+}
+function storeproducts(e){
+    event.preventDefault();
+    let form=document.getElementById("products");
+    // form.innerText=null
+    let type=form.type.value;
+    // type.innertext=null
+       let desc=form.desc.value;
+    let price=form.price.value;
+    let image=form.image.value;
+
+
+    let s1=new product_form(type,desc,price,image)
+    // console.log(s1)
+    arr.push(s1)
+    localStorage.setItem("products",JSON.stringify(arr))
+    
+}
+
+</script>

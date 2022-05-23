@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    #all_products{
+      border: 1px solid red;
+      height: 300px;
+      width: 20%;
+      display: grid;
+      /* grid-template-columns: repeat(4,1fr); */
+      margin: auto
+      gap 11px
+    }  
+    #all_products>img{
+      height: 50%;
+      width: 100%;
+    }
+  </style>
+
+  <body>
+    <div id="navbar">
+      <button id="add_more_products"><a href="index.html">Add more product</a></button>
+      <!--Create Add More Product button here, give id as "add_more_product". avoid making spelling mistakes in HTML id's-->
+    </div>
+    <div id="all_products">
+      <!--append all products data here in grid format-->
+      <!-- The Remove Product button will have id as "remove_product" -->
+    </div>
+  </body>
+</html>
+
+<script>
+  var arr=JSON.parse(localStorage.getItem("products"))||[]
+window.addEventListener("load" ,function(){
+    displaydata(arr)
+})
+function displaydata(arr){
+    arr.map(function(elem,index){
+        var image1 =document.createElement("img")
+        image1.src=elem.image;
+        var type1 =document.createElement("p")
+        type1.innerText=elem.type;
+
+        var price1=document.createElement("p")
+        price1.innerText=elem.price;
+        var desc1 =document.createElement("p")
+        desc1.innerText=elem.desc;
+        var remove =document.createElement("button")
+        remove.innerText="Remove  products"
+        remove.addEventListener("click",function(){
+            removefn(elem,index)
+        })
+        document.getElementById("all_products").append(image1,type1,price1,desc1,remove)
+    })
+}
+function removefn(elem,index){
+    arr.splice(index,1)
+    localStorage.setItem("products",JSON.stringify(arr))
+    window.location.reload()
+}
+</script>
